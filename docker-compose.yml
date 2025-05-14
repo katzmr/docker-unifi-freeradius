@@ -7,7 +7,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
       MYSQL_DATABASE: ${MYSQL_DATABASE:-freeradius}
       MYSQL_USER: ${MYSQL_USER:-radius}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-radiuspassword }
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-radiuspassword}
     volumes:
       - ./mysql:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql

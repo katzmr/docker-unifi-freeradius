@@ -1,6 +1,6 @@
 ###########################################################################
 #                                                                         #
-#  schema.sql                       rlm_sql - FreeRADIUS SQL Module       #
+#  schema.sql.template                       rlm_sql - FreeRADIUS SQL Module       #
 #                                                                         #
 #     Database schema for MySQL rlm_sql module                            #
 ###########################################################################

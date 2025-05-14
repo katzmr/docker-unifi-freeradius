@@ -2,14 +2,11 @@ FROM freeradius/freeradius-server:latest
 
 RUN apt-get update && apt-get install -y libmysqlclient-dev gettext && rm -rf /var/lib/apt/lists/*
 
-COPY mods-available/sql /etc/freeradius/mods-available/sql
-COPY clients.conf /etc/freeradius/clients.conf
+COPY clients.conf.template /etc/freeradius/clients.conf.template
+COPY mods-available/sql.template /etc/freeradius/mods-available/sql.template
 COPY wait_for_db.sh /wait_for_db.sh
-RUN chmod +x /wait_for_db.sh
+COPY entrypoint.sh /entrypoint.sh
 
-RUN envsubst < /etc/freeradius/clients.conf > /etc/freeradius/clients.conf
-RUN envsubst < /etc/freeradius/mods-available/sql > /etc/freeradius/mods-available/sql
+RUN chmod +x /wait_for_db.sh /entrypoint.sh
 
-RUN ln -s /etc/freeradius/mods-available/sql /etc/freeradius/mods-enabled/sql
-
-CMD ["/wait_for_db.sh", "mysql:3306", "--", "freeradius", "-X"]
+CMD ["/entrypoint.sh"]
