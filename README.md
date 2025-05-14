@@ -35,7 +35,7 @@ docker compose up --build -d
 Once everything is up and running, you can access the service at:
 
 - Unifi Controller: https://localhost:8443
-> ⚠️ _Since the certificates are self-signed, your browser may show a security warning when accessing Kibana. You can safely proceed after confirming the exception._
+> ⚠️ _Since the certificates are self-signed, your browser may show a security warning when accessing Unifi Controller. You can safely proceed after confirming the exception._
 
 ## 🧩 Environment Variables Overview (.env)
 | Variable              | Description                  | Default          |
