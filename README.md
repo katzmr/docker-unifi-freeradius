@@ -58,13 +58,9 @@ Once finished, you'll be taken to the UniFi dashboard.
 > - **Optional**: Fill in accounting port 1813 and use the same secret
 
 ### 👤 3. Create a RADIUS User in MySQL
-Access the MySQL container:
+Access the MySQL database:
 ```bash
-docker exec -it mysql mysql -u root -p
-```
-Use the RADIUS database:
-```bash
-USE freeradius;
+docker exec -it mysql mysql -u root -p freeradius
 ```
 > _Replace freeradius with your actual MYSQL_DATABASE value from .env_
 > 
