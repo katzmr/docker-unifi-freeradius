@@ -11,5 +11,6 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /wait_for_db.sh /entrypoint.sh
 RUN chmod +x /update_certificates.sh
+RUN /update_certificates.sh
 
 CMD ["/entrypoint.sh"]
