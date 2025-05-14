@@ -52,10 +52,10 @@ Once finished, you'll be taken to the UniFi dashboard.
 - Add a New RADIUS Profile
 - Click _Create New RADIUS Profile_
 > - **Name**: e.g. freeradius
-> - **RADIUS Server**: IP address of your FreeRADIUS container or host (e.g. 172.18.0.3 or freeradius if using Docker-internal DNS).
+> - **RADIUS Server**: IP address of your FreeRADIUS container or host
 > - **Port**: 1812
 > - **Secret**: must match ${RADIUS_SECRET} from your .env file
-> - **Optional**: Fill in accounting port 1813 and use the same secret.
+> - **Optional**: Fill in accounting port 1813 and use the same secret
 
 ### 👤 3. Create a RADIUS User in MySQL
 Access the MySQL container:
@@ -75,7 +75,7 @@ INSERT INTO radcheck (username, attribute, op, value) VALUES ('testuser', 'Clear
 ```bash
 docker exec -it freeradius radtest testuser testpass localhost 0 testing123
 ```
-> Replace _testing123_ with your actual RADIUS_SECRET value from .env.
+> _Replace testing123 with your actual RADIUS_SECRET value from .env_
 
 You should see an Access-Accept response if everything is working correctly.
 
