@@ -64,8 +64,10 @@ docker exec -it mysql mysql -u root -p
 ```
 Use the RADIUS database:
 ```bash
-USE radius;
+USE freeradius;
 ```
+> _Replace freeradius with your actual MYSQL_DATABASE value from .env_
+> 
 Insert a user into the radcheck table (example: username testuser, password testpass):
 ```sql
 INSERT INTO radcheck (username, attribute, op, value) VALUES ('testuser', 'Cleartext-Password', ':=', 'testpass');
