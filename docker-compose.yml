@@ -1,0 +1,61 @@
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-freeradius}
+      MYSQL_USER: ${MYSQL_USER:-radius}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-radiuspassword }
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+    networks:
+      - unifi_network
+
+  freeradius:
+    build: ./freeradius
+    container_name: freeradius
+    environment:
+      RADIUS_SECRET: ${RADIUS_SECRET:-testing123}
+      MYSQL_USER: ${MYSQL_USER:-radius}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-radiuspassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-freeradius}
+    depends_on:
+      - mysql
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    networks:
+      - unifi_network
+
+  unifi-controller:
+    image: jacobalberty/unifi:latest
+    container_name: unifi-controller
+    restart: always
+    environment:
+      - TZ=${TZ:-Etc/UTC}
+    ports:
+      - "3478:3478/udp"
+      - "10001:10001/udp"
+      - "8080:8080"
+      - "8443:8443"
+      - "8880:8880"
+      - "8843:8843"
+      - "6789:6789"
+    volumes:
+      - unifi_data:/unifi/data
+    networks:
+      - unifi_network
+
+volumes:
+  mysql_data:
+    name: mysql_data
+  unifi_data:
+    name: unifi_data
+
+networks:
+  unifi_network:
+    name: unifi_network
+    driver: bridge
