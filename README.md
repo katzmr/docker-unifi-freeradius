@@ -88,3 +88,19 @@ You should see an Access-Accept response if everything is working correctly.
 | `RADIUS_SECRET`       | RADIUS secret                | `testing123`     |
 | `TZ`                  | Timezone                     | `Etc/UTC`        |
 
+---
+## ✨ Updating the Certificates
+```bash
+docker exec -it freeradius /update_certificates.sh
+```
+This script will:
+- Remove old certificates (if they exist).
+- Generate new CA (Certificate Authority).
+- Generate a new private key for FreeRADIUS.
+- Create a new Certificate Signing Request (CSR) for FreeRADIUS.
+- Sign the new FreeRADIUS certificate with the newly generated CA.
+
+> ⚠️ _After the new certificates are generated, restart the Docker Compose to apply the new certificates:_
+> ```bash
+> docker compose restart freeradius
+> ```
