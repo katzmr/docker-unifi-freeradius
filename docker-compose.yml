@@ -9,7 +9,7 @@ services:
       MYSQL_USER: ${MYSQL_USER:-radius}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-radiuspassword }
     volumes:
-      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./mysql:/docker-entrypoint-initdb.d
       - mysql_data:/var/lib/mysql
     networks:
       - unifi_network
